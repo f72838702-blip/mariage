@@ -1,0 +1,394 @@
+<title>Invitation Aïssata & Mamadou</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap">
+<style>
+  /* ── Carton d'invitation 140 × 140 mm, recto-verso ─────────────
+     Palette reprise du site : ivoire / sable / sauge / doré.
+     Pièce imprimée : thème clair unique, volontaire.            */
+
+  :root {
+    --ivory: #faf7f1;
+    --cream: #f4eee3;
+    --sand: #e6dcc9;
+    --sage: #98a487;
+    --sage-dark: #6f7d5e;
+    --gold: #c2a05c;
+    --gold-light: #e3cf9f;
+    --ink: #33302a;
+    --ink-soft: #6b655a;
+    --bench: #ded5c2;   /* fond de l'atelier (écran uniquement) */
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bench);
+    background-image: radial-gradient(circle at 20% 10%, rgba(194,160,92,0.10), transparent 45%),
+                      radial-gradient(circle at 85% 90%, rgba(152,164,135,0.12), transparent 45%);
+    color: var(--ink);
+    font-family: "Jost", system-ui, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    padding: 48px 16px 64px;
+  }
+
+  .workshop-note {
+    max-width: 560px;
+    text-align: center;
+    color: var(--ink);
+  }
+  .workshop-note h1 {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-weight: 500;
+    font-size: 26px;
+    margin: 0 0 6px;
+  }
+  .workshop-note p {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: #5d5748;
+    margin: 0;
+  }
+  .workshop-note code {
+    background: rgba(51,48,42,0.07);
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-size: 12.5px;
+  }
+
+  .card-label {
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #7a725f;
+  }
+
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+  }
+
+  /* ── La carte ── */
+  .card {
+    position: relative;
+    width: 140mm;
+    height: 140mm;
+    background: var(--ivory);
+    box-shadow: 0 14px 40px rgba(51,48,42,0.22), 0 2px 6px rgba(51,48,42,0.12);
+    overflow: hidden;
+  }
+  /* Double filet doré façon dorure */
+  .card::before {
+    content: "";
+    position: absolute;
+    inset: 4mm;
+    border: 0.45mm solid var(--gold);
+  }
+  .card::after {
+    content: "";
+    position: absolute;
+    inset: 5.6mm;
+    border: 0.2mm solid var(--gold);
+    opacity: 0.75;
+  }
+
+  .card-inner {
+    position: absolute;
+    inset: 10mm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .eyebrow {
+    font-size: 8.5px;
+    font-weight: 500;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--sage-dark);
+  }
+
+  .families {
+    margin-top: 3mm;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.45;
+  }
+
+  .invite-line {
+    margin-top: 2.5mm;
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .names {
+    margin-top: 4mm;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-weight: 600;
+    font-size: 60px;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .names .amp {
+    font-weight: 400;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 52px;
+    margin: 0 2mm;
+  }
+
+  .rule {
+    display: flex;
+    align-items: center;
+    gap: 3mm;
+    margin-top: 4.5mm;
+    color: var(--gold);
+    font-size: 11px;
+  }
+  .rule::before, .rule::after {
+    content: "";
+    display: block;
+    width: 22mm;
+    height: 0.2mm;
+    background: var(--gold);
+  }
+
+  .date {
+    margin-top: 4mm;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  .venue {
+    margin-top: 3mm;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .venue-address {
+    margin-top: 1.5mm;
+    font-size: 10.5px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+
+  .reception {
+    margin-top: 4mm;
+    font-size: 9.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  .reception strong { color: var(--sage-dark); font-weight: 600; }
+
+  .rsvp-line {
+    margin-top: auto;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* ── Verso ── */
+  .verso .card-inner { text-align: left; align-items: stretch; }
+  .verso-head { text-align: center; }
+  .verso-columns {
+    margin-top: 4mm;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 7mm;
+    align-items: center;
+  }
+  .qr-block { text-align: center; }
+  .qr-block img {
+    width: 30mm;
+    height: 30mm;
+    border: 0.2mm solid var(--sand);
+    padding: 1.5mm;
+    background: #fff;
+  }
+  .qr-block figcaption {
+    margin-top: 2mm;
+    font-size: 8.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sage-dark);
+  }
+
+  .program-list { list-style: none; margin: 0; padding: 0; }
+  .program-list li {
+    display: flex;
+    gap: 4mm;
+    padding: 1.6mm 0;
+    border-bottom: 0.15mm solid var(--sand);
+    font-size: 10.5px;
+  }
+  .program-list li:last-child { border-bottom: none; }
+  .program-list time {
+    font-weight: 600;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+    min-width: 12mm;
+  }
+
+  .verso-bottom {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5mm;
+  }
+  .dresscode { display: flex; align-items: center; gap: 2.2mm; }
+  .dresscode .dot {
+    width: 6mm;
+    height: 6mm;
+    border-radius: 50%;
+    border: 0.3mm solid #fff;
+    box-shadow: 0 0 0 0.2mm var(--sand);
+  }
+  .dresscode span.txt {
+    font-size: 8.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-left: 1mm;
+  }
+  .site-line {
+    text-align: center;
+    margin-top: 2.5mm;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    color: var(--ink-soft);
+  }
+  .site-line strong { color: var(--ink); font-weight: 600; }
+  .hashtag { color: var(--gold); font-weight: 500; }
+
+  .print-hint {
+    font-size: 12.5px;
+    color: #6b655a;
+  }
+  .print-btn {
+    font: 500 13px "Jost", system-ui, sans-serif;
+    letter-spacing: 0.08em;
+    color: var(--ivory);
+    background: var(--gold);
+    border: none;
+    border-radius: 999px;
+    padding: 11px 26px;
+    cursor: pointer;
+  }
+  .print-btn:hover { filter: brightness(1.08); }
+  .print-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+  @media print {
+    @page { size: 140mm 140mm; margin: 0; }
+    body { background: none; padding: 0; gap: 0; }
+    .workshop-note, .card-label, .print-btn, .print-hint { display: none; }
+    .cards { display: block; gap: 0; }
+    .card { box-shadow: none; page-break-after: always; }
+  }
+</style>
+
+<div class="workshop-note">
+  <h1>Carton d'invitation — recto / verso</h1>
+  <p>
+    Format carré <code>140 × 140 mm</code>, une face par page à l'impression.
+    Consignes imprimeur : recto-verso sur papier couché mat ivoire 300 g/m²,
+    4 cartons par feuille A4, découpe au filet doré extérieur.
+    Les noms de famille (recto) sont des emplacements à remplacer.
+  </p>
+</div>
+
+<div class="cards">
+  <div>
+    <p class="card-label">Recto</p>
+    <section class="card" style="margin-top:12px">
+      <div class="card-inner">
+        <p class="eyebrow">Mariage</p>
+
+        <p class="families">
+          Les familles &laquo;&nbsp;Famille de la mariée&nbsp;&raquo;<br>
+          et &laquo;&nbsp;Famille du marié&nbsp;&raquo;
+        </p>
+
+        <p class="invite-line">ont l'honneur de vous inviter<br>au mariage de leurs enfants</p>
+
+        <h2 class="names">Aïssata<span class="amp">&amp;</span>Mamadou</h2>
+
+        <div class="rule">❧</div>
+
+        <p class="date">Samedi 12 Juin 2027 · 15h00</p>
+
+        <p class="venue">Bluezone de Dixinn</p>
+        <p class="venue-address">
+          Autoroute Fidèle Castro, Dixinn — Conakry<br>
+          (face au marché Madina)
+        </p>
+
+        <p class="reception">
+          La cérémonie sera suivie sur place du <strong>vin d'honneur</strong>,<br>
+          du <strong>dîner</strong> et de la <strong>soirée dansante</strong>.
+        </p>
+
+        <p class="rsvp-line">RSVP avant le 1er mai 2027 · voir au dos</p>
+      </div>
+    </section>
+  </div>
+
+  <div>
+    <p class="card-label">Verso</p>
+    <section class="card verso" style="margin-top:12px">
+      <div class="card-inner">
+        <div class="verso-head">
+          <p class="eyebrow">Programme &amp; RSVP</p>
+          <p class="families" style="margin-top:1.5mm">Aïssata &amp; Mamadou · 12 juin 2027</p>
+        </div>
+
+        <div class="verso-columns">
+          <figure class="qr-block">
+            <img src="data:image/png;base64,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" alt="QR code vers le site du mariage">
+            <figcaption>RSVP en ligne</figcaption>
+          </figure>
+
+          <ul class="program-list">
+            <li><time>15h00</time><span>Cérémonie</span></li>
+            <li><time>17h30</time><span>Vin d'honneur</span></li>
+            <li><time>20h00</time><span>Dîner</span></li>
+            <li><time>22h00</time><span>Soirée dansante</span></li>
+          </ul>
+        </div>
+
+        <p class="site-line" style="margin-top:5mm">
+          <strong>mariage-three-iota.vercel.app</strong><br>
+          Confirmez votre présence avant le 1er mai 2027 · itinéraire, dress code &amp; cagnotte en ligne
+        </p>
+
+        <div class="verso-bottom">
+          <div class="dresscode">
+            <span class="dot" style="background:#98a487"></span>
+            <span class="dot" style="background:#e6dcc9"></span>
+            <span class="dot" style="background:#c2a05c"></span>
+            <span class="dot" style="background:#c08552"></span>
+            <span class="txt">Dress code : tons sauge, sable &amp; doré</span>
+          </div>
+          <span class="hashtag">#AissataMamadou2027</span>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<button class="print-btn" onclick="window.print()">Imprimer les deux faces</button>
+<p class="print-hint">Astuce : dans la boîte d'impression, choisis « Enregistrer en PDF » pour obtenir un fichier prêt à envoyer à l'imprimeur.</p>
