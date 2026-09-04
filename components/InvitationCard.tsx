@@ -53,6 +53,34 @@ function Divider() {
   );
 }
 
+/**
+ * Équerre ornementale de cadre (dessinée pour le coin haut-gauche,
+ * se miroite via -scale-x/-scale-y) : double arrondi + losange + point.
+ */
+function FrameCorner({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 50 50" fill="none" aria-hidden className={`pointer-events-none absolute h-[11cqw] w-[11cqw] ${className}`}>
+      <g stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M50 2 H12 Q2 2 2 12 V50" strokeWidth="1.3" />
+        <path d="M50 6.5 H14 Q6.5 6.5 6.5 14 V50" strokeWidth="0.9" opacity="0.55" />
+      </g>
+      <path d="M19 15.8 L22.2 19 L19 22.2 L15.8 19 Z" fill="currentColor" />
+      <circle cx="26.5" cy="26.5" r="1" fill="currentColor" opacity="0.6" />
+    </svg>
+  );
+}
+
+/** Petit losange posé sur le filet, au milieu d'un bord */
+function EdgeDiamond({ className = "" }: { className?: string }) {
+  return (
+    <span
+      aria-hidden
+      className={`pointer-events-none absolute h-[1.8cqw] w-[1.8cqw] rotate-45 border border-[#D4AF37] ${className}`}
+      style={{ background: PAPYRUS }}
+    />
+  );
+}
+
 export type InvitationCardProps = {
   /** Nom de l'invité affiché sous « À l'attention de » (carte personnalisée) */
   guestName?: string;
@@ -96,9 +124,21 @@ export default function InvitationCard({
       className={`relative aspect-[5/7] overflow-hidden text-center [container-type:inline-size] ${className}`}
       style={{ background: PAPYRUS, color: SAGE_DARK }}
     >
-      {/* Double filet doré */}
+      {/* ── Cadre ornemental ── */}
+      {/* Filet doré extérieur */}
       <div className="pointer-events-none absolute inset-[2.4cqw] border border-[#D4AF37]/70" />
-      <div className="pointer-events-none absolute inset-[3.6cqw] border border-[#D4AF37]/30" />
+      {/* Équerres doubles aux quatre coins */}
+      <div className="absolute inset-0" style={{ color: BRASS }} aria-hidden>
+        <FrameCorner className="left-[2.4cqw] top-[2.4cqw]" />
+        <FrameCorner className="right-[2.4cqw] top-[2.4cqw] -scale-x-100" />
+        <FrameCorner className="bottom-[2.4cqw] left-[2.4cqw] -scale-y-100" />
+        <FrameCorner className="bottom-[2.4cqw] right-[2.4cqw] -scale-x-100 -scale-y-100" />
+      </div>
+      {/* Losange posé sur le filet, au milieu de chaque bord */}
+      <EdgeDiamond className="left-1/2 top-[2.4cqw] -translate-x-1/2 -translate-y-1/2" />
+      <EdgeDiamond className="bottom-[2.4cqw] left-1/2 -translate-x-1/2 translate-y-1/2" />
+      <EdgeDiamond className="left-[2.4cqw] top-1/2 -translate-x-1/2 -translate-y-1/2" />
+      <EdgeDiamond className="right-[2.4cqw] top-1/2 translate-x-1/2 -translate-y-1/2" />
 
       {/* Halo papyrus très doux au centre */}
       <div
