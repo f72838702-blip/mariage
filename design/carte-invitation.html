@@ -129,6 +129,25 @@
     color: var(--ink-soft);
   }
 
+  /* Ligne invité — alimentée par ?a=Nom+de+l'invité dans l'URL */
+  .guest { margin-top: 3mm; }
+  .guest .guest-label {
+    display: block;
+    font-size: 7.5px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--sage-dark);
+  }
+  .guest .guest-name {
+    display: block;
+    margin-top: 1.2mm;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 22px;
+    color: var(--ink);
+  }
+
   .names {
     margin-top: 4mm;
     font-family: "Cormorant Garamond", Georgia, serif;
@@ -308,6 +327,11 @@
     Consignes imprimeur : recto-verso sur papier couché mat ivoire 300 g/m²,
     4 cartons par feuille A4, découpe au filet doré extérieur.
   </p>
+  <p style="margin-top:6px">
+    <strong>Cartes personnalisées :</strong> ajoutez <code>?a=Nom+de+l'invité</code> à l'URL
+    (ex. <code>invitation.html?a=Aboubacar+Soumah</code>) pour afficher
+    « À l'attention de… » sur le recto, puis imprimez.
+  </p>
 </div>
 
 <div class="cards">
@@ -322,6 +346,11 @@
         </p>
 
         <p class="invite-line">ont l'honneur de vous inviter<br>au mariage de leurs enfants</p>
+
+        <p class="guest" id="guest-line" hidden>
+          <span class="guest-label">À l'attention de</span>
+          <span class="guest-name" id="guest-name"></span>
+        </p>
 
         <h2 class="names">Mariame<span class="amp">&amp;</span>Bobacar</h2>
 
@@ -390,3 +419,16 @@
 
 <button class="print-btn" onclick="window.print()">Imprimer les deux faces</button>
 <p class="print-hint">Astuce : dans la boîte d'impression, choisis « Enregistrer en PDF » pour obtenir un fichier prêt à envoyer à l'imprimeur.</p>
+
+<script>
+  // Personnalisation invité : invitation.html?a=Nom+de+l'invité
+  (function () {
+    try {
+      var name = new URLSearchParams(window.location.search).get("a") || "";
+      name = name.trim().slice(0, 80);
+      if (!name) return;
+      document.getElementById("guest-name").textContent = name;
+      document.getElementById("guest-line").hidden = false;
+    } catch (e) { /* sans query string, la carte reste générique */ }
+  })();
+</script>
