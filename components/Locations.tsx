@@ -7,10 +7,6 @@ function mapsUrl(address: string): string {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
 }
 
-function wazeUrl(address: string): string {
-  return `https://waze.com/ul?q=${encodeURIComponent(address)}&navigate=yes`;
-}
-
 export default function Locations() {
   return (
     <section id="lieux" className="bg-cream/60 px-6 py-24">
@@ -37,24 +33,15 @@ export default function Locations() {
                 </p>
                 <p className="mt-3 text-sm italic text-ink-soft/80">{venue.note}</p>
 
-                <div className="mt-6 flex gap-3 pt-2">
+                <div className="mt-6 pt-2">
                   <a
                     href={mapsUrl(venue.address)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-primary flex-1 px-4 py-2.5 text-xs"
+                    className="btn-primary w-full px-4 py-2.5 text-xs"
                   >
                     <Navigation size={14} />
-                    Google Maps
-                  </a>
-                  <a
-                    href={wazeUrl(venue.address)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-outline flex-1 px-4 py-2.5 text-xs"
-                  >
-                    <Navigation size={14} />
-                    Waze
+                    Ouvrir dans Google Maps
                   </a>
                 </div>
               </article>
