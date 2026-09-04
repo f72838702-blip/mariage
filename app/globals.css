@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-display: var(--font-cormorant), "Georgia", serif;
+  --font-body: var(--font-jost), system-ui, sans-serif;
+}
+
+@theme {
+  /* Palette — Blanc cassé / Sable / Sauge / Doré */
+  --color-ivory: #faf7f1;
+  --color-cream: #f4eee3;
+  --color-sand: #e6dcc9;
+  --color-sage: #98a487;
+  --color-sage-dark: #6f7d5e;
+  --color-olive: #565f45;
+  --color-gold: #c2a05c;
+  --color-gold-light: #e3cf9f;
+  --color-ink: #33302a;
+  --color-ink-soft: #6b655a;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-ivory);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Décalage d'ancre pour la navbar fixe */
+section[id] {
+  scroll-margin-top: 4.5rem;
+}
+
+::selection {
+  background: var(--color-gold-light);
+  color: var(--color-ink);
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 text-sm font-medium tracking-wide text-white shadow-lg shadow-gold/25 transition-all hover:brightness-110 active:scale-[0.98];
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-ink/15 bg-white/60 px-7 py-3.5 text-sm font-medium tracking-wide text-ink backdrop-blur transition-all hover:border-gold hover:text-gold active:scale-[0.98];
+  }
+  .card {
+    @apply rounded-3xl border border-ink/8 bg-white/70 p-6 shadow-sm backdrop-blur;
+  }
+  .input-field {
+    @apply w-full rounded-xl border border-ink/12 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink-soft/60 outline-none transition-colors focus:border-gold focus:ring-2 focus:ring-gold/20;
+  }
+  .label-field {
+    @apply mb-1.5 block text-xs font-medium uppercase tracking-widest text-ink-soft;
+  }
+}
