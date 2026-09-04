@@ -1,0 +1,12 @@
+declare module "qrcode" {
+  export interface QRCodeToDataURLOptions {
+    margin?: number;
+    width?: number;
+    scale?: number;
+    errorCorrectionLevel?: "L" | "M" | "Q" | "H";
+    color?: { dark?: string; light?: string };
+  }
+  export function toDataURL(text: string, options?: QRCodeToDataURLOptions): Promise<string>;
+  const QRCode: { toDataURL: typeof toDataURL };
+  export default QRCode;
+}
