@@ -7,6 +7,9 @@
  */
 
 export const wedding = {
+  /** URL publique du site (sert au QR code de l'espace photos) */
+  siteUrl: "https://mariage-three-iota.vercel.app",
+
   /* ── A. IDENTITÉ ─────────────────────────────────────────── */
   couple: {
     name1: "Aïssata",
@@ -125,9 +128,9 @@ export const wedding = {
 
   /* ── E. PHOTOS & LIVRE D'OR ──────────────────────────────── */
   photos: {
-    /** Lien du dossier partagé (Google Drive / Dropbox / WedShoots) */
+    /** Plan B externe (Google Drive / Dropbox / WedShoots) — affiché en lien discret */
     uploadUrl: "https://drive.google.com/drive/folders/votre-dossier",
-    note: "Flashez le QR code ou cliquez sur le bouton pour déposer vos plus belles photos du jour J.",
+    note: "Flashez le QR code ou appuyez sur le bouton : déposez vos photos sur l'album des invités, puis consultez et téléchargez celles des autres après la soirée.",
     audioNote:
       "Un livre d'or audio vous attendra à l'entrée de la salle : laissez-nous un message vocal, on écoutera tout en rentrant de voyage de noces !",
   },

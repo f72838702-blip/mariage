@@ -1,4 +1,5 @@
-import { Camera, Mic, Upload } from "lucide-react";
+import Link from "next/link";
+import { Camera, ExternalLink, Mic, Upload } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import Guestbook from "@/components/Guestbook";
@@ -32,17 +33,22 @@ export default function Memories() {
               </p>
 
               <div className="mt-6 rounded-2xl border border-ink/8 bg-white p-3 shadow-sm">
-                <QRCode value={photos.uploadUrl} size={160} />
+                <QRCode value={`${wedding.siteUrl}/photos`} size={160} />
               </div>
+
+              <Link href="/photos" className="btn-primary mt-6 w-full">
+                <Upload size={16} />
+                Partager mes photos
+              </Link>
 
               <a
                 href={photos.uploadUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary mt-6 w-full"
+                className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium text-ink-soft transition-colors hover:text-gold"
               >
-                <Upload size={16} />
-                Uploader mes photos
+                <ExternalLink size={12} />
+                ou via Google Drive
               </a>
 
               <p className="mt-6 flex items-start gap-2 rounded-2xl bg-gold/10 p-4 text-left text-xs leading-relaxed text-ink-soft">
