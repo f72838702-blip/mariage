@@ -8,6 +8,14 @@ import {
   Home,
   MapPin,
 } from "lucide-react";
+import { wedding } from "@/config/wedding";
+
+const Monogram = () => (
+  <>
+    {wedding.couple.name1[0]} <span className="text-gold">&</span>{" "}
+    {wedding.couple.name2[0]}
+  </>
+);
 
 const links = [
   { href: "#programme", label: "Programme" },
@@ -32,7 +40,7 @@ export default function Navbar() {
       <header className="fixed inset-x-0 top-0 z-50 hidden border-b border-ink/5 bg-ivory/80 backdrop-blur-md md:block">
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <a href="#accueil" className="font-display text-xl italic text-ink">
-            A <span className="text-gold">&</span> M
+            <Monogram />
           </a>
           <ul className="flex items-center gap-8">
             {links.map((l) => (
@@ -56,7 +64,7 @@ export default function Navbar() {
       {/* ══ Barre supérieure (mobile) — minimaliste ══ */}
       <header className="fixed inset-x-0 top-0 z-50 flex items-center justify-between border-b border-ink/5 bg-ivory/80 px-5 py-3 backdrop-blur-md md:hidden">
         <a href="#accueil" className="font-display text-lg italic text-ink">
-          A <span className="text-gold">&</span> M
+          <Monogram />
         </a>
         <a
           href="#cagnotte"

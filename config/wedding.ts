@@ -12,23 +12,23 @@ export const wedding = {
 
   /* ── A. IDENTITÉ ─────────────────────────────────────────── */
   couple: {
-    name1: "Aïssata",
-    name2: "Mamadou",
-    hashtag: "#AissataMamadou2027",
+    name1: "Mariame",
+    name2: "Bobacar",
+    hashtag: "#MariameBobacar2026",
   },
 
   /** Date ISO du début de la cérémonie (compte à rebours, agenda) */
-  weddingDate: "2027-06-12T15:00:00Z",
+  weddingDate: "2026-09-15T15:00:00Z",
   /** Date ISO de fin estimée de l'événement (fichier .ics) */
-  weddingEndDate: "2027-06-13T04:00:00Z",
-  dateLabel: "Samedi 12 Juin 2027",
+  weddingEndDate: "2026-09-16T04:00:00Z",
+  dateLabel: "Mardi 15 Septembre 2026",
   city: "Conakry, Guinée",
 
   /** Photo du hero : déposez votre image dans /public/images/hero.jpg */
   heroImage: "/images/hero.jpg",
 
   rsvp: {
-    deadline: "1er mai 2027",
+    deadline: "10 septembre 2026",
     /** Numéro WhatsApp des mariés (format international sans +) recevant les RSVP */
     whatsappNumber: "224620000000",
   },
@@ -118,7 +118,7 @@ export const wedding = {
     intro:
       "Votre présence est le plus beau des cadeaux. Si vous souhaitez nous gâter davantage, une cagnotte nous aidera à concrétiser notre voyage de noces et nos premiers projets à deux.",
     iban: "FR76 3000 4000 5000 0000 0000 000",
-    ibanOwner: "M. & Mme CAMARA",
+    ibanOwner: "Mariage Mariame & Bobacar",
     paypal: "https://paypal.me/votre-lien",
     mobileMoney: [
       { name: "Orange Money", number: "+224 620 00 00 00" },

@@ -1,4 +1,4 @@
-# 💍 Site de mariage — Aïssata & Mamadou
+# 💍 Site de mariage — Mariame & Bobacar (15 septembre 2026)
 
 Plateforme de mariage élégante, mobile-first, construite avec **Next.js (App Router) + TypeScript + Tailwind CSS v4 + Framer Motion + React Hook Form + Zod + Zustand**.
 

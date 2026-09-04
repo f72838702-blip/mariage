@@ -21,14 +21,14 @@ const seedMessages: GuestMessage[] = [
     name: "Famille Diallo",
     message:
       "Félicitations aux tourtereaux ! Que votre union soit remplie de joie, de baraka et de belles années ensemble.",
-    date: "12/06/2027",
+    date: "15/09/2026",
   },
   {
     id: "seed-2",
     name: "Aminata & Sékou",
     message:
       "On a dansé jusqu'au bout de la nuit… Merci pour ce moment magique. Longue et heureuse vie à vous deux !",
-    date: "12/06/2027",
+    date: "15/09/2026",
   },
 ];
 
