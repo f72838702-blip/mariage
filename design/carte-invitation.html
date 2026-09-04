@@ -3,7 +3,9 @@
 <style>
   /* ── Carton d'invitation 140 × 140 mm, recto-verso ─────────────
      Palette reprise du site : ivoire / sable / sauge / doré.
-     Pièce imprimée : thème clair unique, volontaire.            */
+     Pièce imprimée : thème clair unique, volontairement.
+     NB : public/invitation.html (version servie) embarque la photo
+     en base64 — fichier auto-contenu, prêt pour l'imprimeur.      */
 
   :root {
     --ivory: #faf7f1;
@@ -94,6 +96,35 @@
     border: 0.2mm solid var(--gold);
     opacity: 0.75;
   }
+  /* Lueur papier : halo crème au centre, vignette douce sur les bords */
+  .card .paper-glow {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(65% 55% at 50% 34%, rgba(230,220,201,0.55), transparent 70%),
+      radial-gradient(120% 120% at 50% 50%, transparent 62%, rgba(51,48,42,0.05) 100%);
+  }
+  /* Coins dorés sur le filet intérieur */
+  .card .corner {
+    position: absolute;
+    width: 7mm;
+    height: 7mm;
+    opacity: 0.9;
+  }
+  .card .corner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 0.35mm solid var(--gold);
+  }
+  .card .corner.tl { top: 7.2mm; left: 7.2mm; }
+  .card .corner.tl::before { border-right: none; border-bottom: none; }
+  .card .corner.tr { top: 7.2mm; right: 7.2mm; }
+  .card .corner.tr::before { border-left: none; border-bottom: none; }
+  .card .corner.bl { bottom: 7.2mm; left: 7.2mm; }
+  .card .corner.bl::before { border-right: none; border-top: none; }
+  .card .corner.br { bottom: 7.2mm; right: 7.2mm; }
+  .card .corner.br::before { border-left: none; border-top: none; }
 
   .card-inner {
     position: absolute;
@@ -112,6 +143,34 @@
     color: var(--sage-dark);
   }
 
+  /* ── Portrait du couple : arche dorée ── */
+  .portrait-wrap {
+    margin-top: 3.2mm;
+    position: relative;
+  }
+  .portrait {
+    display: block;
+    width: 24mm;
+    height: 30mm;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 12mm 12mm 1.6mm 1.6mm;
+    border: 0.45mm solid var(--gold);
+    box-shadow: 0 0 0 1.1mm var(--ivory), 0 0 0 1.35mm var(--gold-light),
+                0 3mm 6mm rgba(51,48,42,0.20);
+  }
+  .portrait-halo {
+    position: absolute;
+    left: 50%;
+    bottom: -2.4mm;
+    transform: translateX(-50%);
+    width: 34mm;
+    height: 4mm;
+    border-radius: 50%;
+    background: rgba(194,160,92,0.30);
+    filter: blur(2.2mm);
+  }
+
   .families {
     margin-top: 3mm;
     font-family: "Cormorant Garamond", Georgia, serif;
@@ -122,7 +181,7 @@
   }
 
   .invite-line {
-    margin-top: 2.5mm;
+    margin-top: 2mm;
     font-size: 9px;
     letter-spacing: 0.28em;
     text-transform: uppercase;
@@ -130,7 +189,7 @@
   }
 
   /* Ligne invité — alimentée par ?a=Nom+de+l'invité dans l'URL */
-  .guest { margin-top: 3mm; }
+  .guest { margin-top: 2.4mm; }
   .guest .guest-label {
     display: block;
     font-size: 7.5px;
@@ -140,19 +199,19 @@
   }
   .guest .guest-name {
     display: block;
-    margin-top: 1.2mm;
+    margin-top: 1mm;
     font-family: "Cormorant Garamond", Georgia, serif;
     font-style: italic;
     font-weight: 500;
-    font-size: 22px;
+    font-size: 21px;
     color: var(--ink);
   }
 
   .names {
-    margin-top: 4mm;
+    margin-top: 3.4mm;
     font-family: "Cormorant Garamond", Georgia, serif;
     font-weight: 600;
-    font-size: 60px;
+    font-size: 54px;
     letter-spacing: 0.04em;
     color: var(--ink);
     line-height: 1;
@@ -161,15 +220,15 @@
     font-weight: 400;
     font-style: italic;
     color: var(--gold);
-    font-size: 52px;
-    margin: 0 2mm;
+    font-size: 46px;
+    margin: 0 1.6mm;
   }
 
   .rule {
     display: flex;
     align-items: center;
     gap: 3mm;
-    margin-top: 4.5mm;
+    margin-top: 3.6mm;
     color: var(--gold);
     font-size: 11px;
   }
@@ -180,9 +239,27 @@
     height: 0.2mm;
     background: var(--gold);
   }
+  /* Petit losange doré entre deux points, au-dessus de la date */
+  .diamond {
+    display: flex;
+    align-items: center;
+    gap: 2.6mm;
+    margin-top: 3.2mm;
+    color: var(--gold);
+    font-size: 7px;
+  }
+  .diamond::before, .diamond::after {
+    content: "";
+    display: block;
+    width: 1.6mm;
+    height: 1.6mm;
+    background: var(--gold);
+    transform: rotate(45deg);
+    opacity: 0.85;
+  }
 
   .date {
-    margin-top: 4mm;
+    margin-top: 3mm;
     font-size: 13px;
     font-weight: 500;
     letter-spacing: 0.3em;
@@ -191,21 +268,21 @@
   }
 
   .venue {
-    margin-top: 3mm;
+    margin-top: 2.6mm;
     font-family: "Cormorant Garamond", Georgia, serif;
     font-size: 20px;
     font-weight: 500;
     color: var(--ink);
   }
   .venue-address {
-    margin-top: 1.5mm;
+    margin-top: 1.2mm;
     font-size: 10.5px;
     line-height: 1.5;
     color: var(--ink-soft);
   }
 
   .reception {
-    margin-top: 4mm;
+    margin-top: 3mm;
     font-size: 9.5px;
     line-height: 1.55;
     color: var(--ink-soft);
@@ -220,26 +297,57 @@
     color: var(--gold);
   }
 
+  /* Quand une ligne invité est affichée : on resserre pour tout tenir */
+  .card.has-guest .portrait { width: 19mm; height: 24mm; border-radius: 9.5mm 9.5mm 1.6mm 1.6mm; }
+  .card.has-guest .portrait-wrap { margin-top: 2.4mm; }
+  .card.has-guest .families { margin-top: 2mm; }
+  .card.has-guest .invite-line { margin-top: 1.6mm; }
+  .card.has-guest .guest { margin-top: 2mm; }
+  .card.has-guest .guest .guest-name { font-size: 19px; }
+  .card.has-guest .names { font-size: 42px; margin-top: 2.6mm; }
+  .card.has-guest .names .amp { font-size: 36px; }
+  .card.has-guest .diamond { display: none; }
+  .card.has-guest .date { margin-top: 2.2mm; font-size: 12px; }
+  .card.has-guest .venue { margin-top: 2mm; font-size: 18px; }
+  .card.has-guest .venue-address { margin-top: 1mm; font-size: 9.5px; }
+  .card.has-guest .reception { display: none; }
+
   /* ── Verso ── */
   .verso .card-inner { text-align: left; align-items: stretch; }
   .verso-head { text-align: center; }
+  .verso-head .ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2.6mm;
+    margin-top: 2.2mm;
+    color: var(--gold);
+    font-size: 7px;
+  }
+  .verso-head .ornament::before, .verso-head .ornament::after {
+    content: "";
+    display: block;
+    width: 18mm;
+    height: 0.2mm;
+    background: var(--gold);
+  }
   .verso-columns {
-    margin-top: 4mm;
+    margin-top: 5mm;
     display: grid;
     grid-template-columns: auto 1fr;
-    gap: 7mm;
+    gap: 8mm;
     align-items: center;
   }
   .qr-block { text-align: center; }
   .qr-block img {
-    width: 30mm;
-    height: 30mm;
-    border: 0.2mm solid var(--sand);
-    padding: 1.5mm;
+    width: 31mm;
+    height: 31mm;
+    border: 0.45mm solid var(--gold);
+    box-shadow: 0 0 0 1.1mm #fff, 0 0 0 1.35mm var(--gold-light);
     background: #fff;
   }
   .qr-block figcaption {
-    margin-top: 2mm;
+    margin-top: 2.6mm;
     font-size: 8.5px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -249,10 +357,11 @@
   .program-list { list-style: none; margin: 0; padding: 0; }
   .program-list li {
     display: flex;
+    align-items: baseline;
     gap: 4mm;
-    padding: 1.6mm 0;
+    padding: 2.2mm 0;
     border-bottom: 0.15mm solid var(--sand);
-    font-size: 10.5px;
+    font-size: 11px;
   }
   .program-list li:last-child { border-bottom: none; }
   .program-list time {
@@ -261,9 +370,34 @@
     font-variant-numeric: tabular-nums;
     min-width: 12mm;
   }
+  .program-list .prog-note {
+    display: block;
+    margin-top: 0.6mm;
+    font-size: 9px;
+    color: var(--ink-soft);
+  }
+
+  .site-block {
+    margin-top: auto;
+    text-align: center;
+    padding: 3.2mm 0 0;
+    border-top: 0.2mm solid var(--sand);
+  }
+  .site-block .site-url {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: var(--ink);
+  }
+  .site-block .site-sub {
+    margin-top: 1.2mm;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--ink-soft);
+  }
 
   .verso-bottom {
-    margin-top: auto;
+    margin-top: 3.4mm;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -284,15 +418,7 @@
     color: var(--ink-soft);
     margin-left: 1mm;
   }
-  .site-line {
-    text-align: center;
-    margin-top: 2.5mm;
-    font-size: 9px;
-    letter-spacing: 0.12em;
-    color: var(--ink-soft);
-  }
-  .site-line strong { color: var(--ink); font-weight: 600; }
-  .hashtag { color: var(--gold); font-weight: 500; }
+  .hashtag { color: var(--gold); font-weight: 500; font-size: 10px; }
 
   .print-hint {
     font-size: 12.5px;
@@ -338,8 +464,18 @@
   <div>
     <p class="card-label">Recto</p>
     <section class="card" style="margin-top:12px">
+      <div class="paper-glow"></div>
+      <div class="corner tl"></div>
+      <div class="corner tr"></div>
+      <div class="corner bl"></div>
+      <div class="corner br"></div>
       <div class="card-inner">
         <p class="eyebrow">Mariage</p>
+
+        <div class="portrait-wrap">
+          <img class="portrait" src="../public/images/hero.jpg" alt="Mariame &amp; Bobacar">
+          <div class="portrait-halo"></div>
+        </div>
 
         <p class="families">
           Les familles <strong>Sylla</strong> &amp; <strong>Bah</strong>
@@ -354,7 +490,7 @@
 
         <h2 class="names">Mariame<span class="amp">&amp;</span>Bobacar</h2>
 
-        <div class="rule">❧</div>
+        <div class="diamond">❧</div>
 
         <p class="date">Mardi 15 Septembre 2026 · 15h00</p>
 
@@ -377,30 +513,36 @@
   <div>
     <p class="card-label">Verso</p>
     <section class="card verso" style="margin-top:12px">
+      <div class="paper-glow"></div>
+      <div class="corner tl"></div>
+      <div class="corner tr"></div>
+      <div class="corner bl"></div>
+      <div class="corner br"></div>
       <div class="card-inner">
         <div class="verso-head">
           <p class="eyebrow">Programme &amp; RSVP</p>
           <p class="families" style="margin-top:1.5mm">Mariame &amp; Bobacar · 15 septembre 2026</p>
+          <div class="ornament">❧</div>
         </div>
 
         <div class="verso-columns">
           <figure class="qr-block">
-            <img src="data:image/png;base64,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" alt="QR code vers le site du mariage">
+            <img src="data:image/png;base64,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" alt="QR code vers le site du mariage">
             <figcaption>RSVP en ligne</figcaption>
           </figure>
 
           <ul class="program-list">
-            <li><time>15h00</time><span>Cérémonie</span></li>
-            <li><time>17h30</time><span>Vin d'honneur</span></li>
-            <li><time>20h00</time><span>Dîner</span></li>
-            <li><time>22h00</time><span>Soirée dansante</span></li>
+            <li><time>15h00</time><span>Cérémonie<span class="prog-note">Accueil &amp; placement dès 14h30</span></span></li>
+            <li><time>17h30</time><span>Vin d'honneur<span class="prog-note">Photos dans les espaces extérieurs</span></span></li>
+            <li><time>20h00</time><span>Dîner<span class="prog-note">Menu à trois services</span></span></li>
+            <li><time>22h00</time><span>Soirée dansante<span class="prog-note">Ouverture de bal des mariés</span></span></li>
           </ul>
         </div>
 
-        <p class="site-line" style="margin-top:5mm">
-          <strong>mariage-three-iota.vercel.app</strong><br>
-          Confirmez votre présence avant le 10 septembre 2026 · itinéraire, dress code &amp; cagnotte en ligne
-        </p>
+        <div class="site-block">
+          <p class="site-url">mariage-three-iota.vercel.app</p>
+          <p class="site-sub">Confirmez votre présence avant le 10 septembre 2026 · itinéraire, dress code &amp; cagnotte en ligne</p>
+        </div>
 
         <div class="verso-bottom">
           <div class="dresscode">
@@ -429,6 +571,8 @@
       if (!name) return;
       document.getElementById("guest-name").textContent = name;
       document.getElementById("guest-line").hidden = false;
+      // On resserre la mise en page quand la ligne invité est visible
+      document.querySelectorAll(".card").forEach(function (c) { c.classList.add("has-guest"); });
     } catch (e) { /* sans query string, la carte reste générique */ }
   })();
 </script>
