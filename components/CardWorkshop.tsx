@@ -1,16 +1,17 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { Check, Copy, Printer } from "lucide-react";
+import { Check, Copy, Download, LoaderCircle, Printer } from "lucide-react";
 import InvitationCard from "@/components/InvitationCard";
 import { wedding } from "@/config/wedding";
+import { downloadCardPdf } from "@/lib/cardPdf";
 
 /* ─────────────────────────────────────────────────────────────
    Atelier de la carte d'invitation (page /carte)
    · Aperçu flottant, ombre très douce
    · Personnalisation par invité : ?a=Nom+de+l'invité ou le champ
-   · Impression : une carte 105 × 147 mm par page (@page 5:7)
+   · Téléchargement PDF (105 × 147 mm) ou impression navigateur
    ───────────────────────────────────────────────────────────── */
 
 export default function CardWorkshop() {
@@ -18,6 +19,8 @@ export default function CardWorkshop() {
   const urlGuest = searchParams.get("a") ?? "";
   const [guest, setGuest] = useState(urlGuest);
   const [copied, setCopied] = useState(false);
+  const [pdfState, setPdfState] = useState<"idle" | "loading" | "error">("idle");
+  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (urlGuest) setGuest(urlGuest);
@@ -38,6 +41,20 @@ export default function CardWorkshop() {
       setTimeout(() => setCopied(false), 2000);
     } catch {
       /* presse-papiers indisponible */
+    }
+  }
+
+  async function downloadPdf() {
+    const node = cardRef.current?.querySelector<HTMLElement>(".invitation-card");
+    if (!node) return;
+    setPdfState("loading");
+    try {
+      const name = trimmed ? `-${trimmed.replace(/\s+/g, "-")}` : "";
+      await downloadCardPdf(node, `invitation-mariame-bobacar${name}.pdf`);
+      setPdfState("idle");
+    } catch {
+      setPdfState("error");
+      setTimeout(() => setPdfState("idle"), 4000);
     }
   }
 
@@ -89,23 +106,44 @@ export default function CardWorkshop() {
             </button>
             <button
               type="button"
+              onClick={downloadPdf}
+              disabled={pdfState === "loading"}
+              className="h-11 whitespace-nowrap rounded-full bg-gold px-5 text-sm font-medium text-ivory transition hover:brightness-110 disabled:opacity-70"
+              title="Télécharger la carte en PDF (105 × 147 mm)"
+            >
+              {pdfState === "loading" ? (
+                <LoaderCircle size={16} className="mr-2 inline animate-spin" />
+              ) : (
+                <Download size={16} className="mr-2 inline" />
+              )}
+              {pdfState === "loading" ? "Génération…" : "PDF"}
+            </button>
+            <button
+              type="button"
               onClick={() => window.print()}
-              className="h-11 whitespace-nowrap rounded-full bg-gold px-5 text-sm font-medium text-ivory transition hover:brightness-110"
+              className="h-11 whitespace-nowrap rounded-full border border-white/40 px-4 text-sm font-medium text-white transition hover:bg-white/10"
             >
               <Printer size={16} className="mr-2 inline" />
               Imprimer
             </button>
           </div>
         </div>
+        {pdfState === "error" ? (
+          <p className="mt-3 text-xs font-medium text-red-200">
+            La génération du PDF a échoué — utilisez le bouton « Imprimer » puis
+            « Enregistrer en PDF » dans la boîte d&apos;impression.
+          </p>
+        ) : null}
         <p className="mt-3 text-xs leading-relaxed text-white/80">
-          À l&apos;impression : format <strong>105 × 147 mm</strong> (ratio 5:7), une carte par page,
-          marges à zéro. Le lien personnalisé de cette carte :{" "}
+          Le bouton <strong>PDF</strong> télécharge la carte prête à imprimer (
+          <strong>105 × 147 mm</strong>, ratio 5:7, marges zéro) — ou envoyez
+          directement le fichier par WhatsApp à l&apos;invité. Le lien personnalisé de cette carte :{" "}
           <span className="break-all font-medium text-white">{shareUrl}</span>
         </p>
       </div>
 
       {/* ── Flat lay : la carte flottante sur le fond sauge ── */}
-      <div className="card-stage mt-12 flex w-full justify-center px-2 py-10">
+      <div ref={cardRef} className="card-stage mt-12 flex w-full justify-center px-2 py-10">
         <InvitationCard
           guestName={trimmed || undefined}
           className="invitation-card w-[min(92vw,540px)] rounded-[3px] shadow-[0_50px_100px_-30px_rgba(26,32,24,0.55),0_18px_40px_-18px_rgba(26,32,24,0.4),0_0_0_1px_rgba(255,255,255,0.08)]"
