@@ -68,6 +68,8 @@ export const wedding = {
       name: "Bluezone de Dixinn",
       label: "Cérémonie, vin d'honneur, dîner & soirée",
       address: "Bluezone de Dixinn, Autoroute Fidèle Castro, Dixinn, Conakry",
+      /** Lien Google Maps exact (coordonnées GPS de l'épingle officielle) */
+      mapsUrl: "https://www.google.com/maps/search/?api=1&query=9.5524788,-13.6582613",
       note: "Entrée principale sur l'autoroute Fidèle Castro, face au marché Madina. Parking et groupes électrogènes sur place.",
     },
   ],

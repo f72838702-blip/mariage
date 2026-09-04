@@ -3,10 +3,6 @@ import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import { wedding } from "@/config/wedding";
 
-function mapsUrl(address: string): string {
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
-}
-
 export default function Locations() {
   return (
     <section id="lieux" className="bg-cream/60 px-6 py-24">
@@ -35,7 +31,7 @@ export default function Locations() {
 
                 <div className="mt-6 pt-2">
                   <a
-                    href={mapsUrl(venue.address)}
+                    href={venue.mapsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-primary w-full px-4 py-2.5 text-xs"
