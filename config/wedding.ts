@@ -34,16 +34,16 @@ export const wedding = {
   program: [
     {
       time: "15h00",
-      title: "Cérémonie civile",
+      title: "Cérémonie",
       description:
-        "Mairie de Kaloum. Merci d'arriver 30 minutes en avance pour le placement des invités.",
+        "Bluezone de Dixinn. Merci d'arriver 30 minutes en avance pour le placement des invités.",
       icon: "landmark" as const,
     },
     {
       time: "17h30",
       title: "Vin d'honneur",
       description:
-        "Cocktail et photos dans les jardins, sous les flamants et la lumière dorée.",
+        "Cocktail et photos dans les espaces extérieurs de la Bluezone, à la lumière dorée.",
       icon: "glass" as const,
     },
     {
@@ -65,16 +65,10 @@ export const wedding = {
   /* ── B. LIEUX ────────────────────────────────────────────── */
   venues: [
     {
-      name: "Mairie de Kaloum",
-      label: "Cérémonie civile",
-      address: "Avenue de la République, Kaloum, Conakry",
-      note: "Parking disponible sur place. Cérémonie à 15h00 précises.",
-    },
-    {
-      name: "Salle des Jardins d'Eden",
-      label: "Vin d'honneur, dîner & soirée",
-      address: "Route de Donka, Ratoma, Conakry",
-      note: "Navette gratuite depuis la mairie à 17h00.",
+      name: "Bluezone de Dixinn",
+      label: "Cérémonie, vin d'honneur, dîner & soirée",
+      address: "Bluezone de Dixinn, Autoroute Fidèle Castro, Dixinn, Conakry",
+      note: "Entrée principale sur l'autoroute Fidèle Castro, face au marché Madina. Parking et groupes électrogènes sur place.",
     },
   ],
 

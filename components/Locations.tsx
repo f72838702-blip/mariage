@@ -21,7 +21,7 @@ export default function Locations() {
           description="Deux adresses, une seule journée. Ouvrez l'itinéraire en un clic."
         />
 
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="mx-auto grid max-w-2xl gap-6">
           {wedding.venues.map((venue, i) => (
             <Reveal key={venue.name} delay={i * 0.1}>
               <article className="card flex h-full flex-col">
